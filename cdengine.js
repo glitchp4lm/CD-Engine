@@ -1,3 +1,5 @@
+import * as p2 from 'https://www.unpkg.com/p2-es/dist/p2-es.js'
+
 const canvas = document.createElement('canvas');
 document.body.appendChild(canvas);
 const ctx = canvas.getContext('2d');
