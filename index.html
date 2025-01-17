@@ -1,0 +1,858 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>CD Engine Documentação</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+	background-color: #111;
+}
+
+* {
+	color: #fff;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+	background-color: #333;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(0, 0, 0, 0.06); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="16609046-af7e-8075-986b-cb562aee2c28" class="page sans"><header><img class="page-cover-image" src="https://www.notion.so/images/page-cover/woodcuts_10.jpg" style="object-position:center 90%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">💿</span></div><h1 class="page-title">CD Engine Documentação</h1><p class="page-description"></p></header><div class="page-body"><h1 id="16609046-af7e-805e-939c-fb386329fd43" class="">Introdução</h1><p id="16609046-af7e-8079-a4d2-ecafef9692be" class="">A CD Engine é uma game engine simples criada com NodeJs e ElectronJs para originalmente desenvolvedores linux criarem jogos de forma simples utilizando JavaScript mas com um apoio de algumas pessoas o projeto foi escalado para uma engine multi plataforma focada em Linux, Windows e Android.</p><p id="16609046-af7e-800f-b14b-f3d3015714b0" class="">O propósito da engine é ser simples e focada na criação de jogos 2d para navegadores e sua principal filosofía é ser leve e simples para qualquer pessoa poder aprender a programar nela sem precisar fazer cursos e cursos e também por ser uma engine Brasileira desenvolvida por uma pessoa só, ela tem o propósito de atender a características Brasileiras e ser bem inclusiva.</p><h1 id="16609046-af7e-80e4-9fbf-d2d526617d80" class="">Primeiros passos</h1><h2 id="16609046-af7e-80c0-8fa4-e22b6b9dd682" class="">Configurando um novo projeto</h2><p id="16609046-af7e-80a3-92f7-c56724d1dd2f" class="">A CD Engine usa a linguagem de programação JavaScript e isso faz ela ser simples e leve, para começar seu projeto, basta definir o caminho aonde seus projetos serão salvos depois criar um novo projeto, abrir a pasta de seu projeto e abrir o arquivo <em>game.js</em> no seu editor de códigos favorito e só começar a programar.</p><h2 id="16609046-af7e-8063-8999-c43d7b0d3839" class="">Como iniciar um projeto?</h2><p id="16609046-af7e-8075-b869-fab3fbaf8c9e" class="">Para iniciar seu projeto, basta abrir o programa/apk da engine, abrir o projeto desejado e apertar em run e pronto, seu projeto foi iniciado.</p><h1 id="17009046-af7e-8051-b5ed-e4dab8152c94" class="">Estruturas</h1><p id="17009046-af7e-8048-8fb5-cd9b2e5f9f52" class="">Na CD Engine temos 2 estruturas opicionais mas que podem ser importantes pois ajudam no desenvolvimento, organização e ordem do projeto, temos o <em>onStart</em> que executa comandos assim que o jogo abre e o <em>onUpdate</em> que executa comandos a cada frame do jogo e essas estruturas não dependem da cena, por isso, use com sabedoria.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="17009046-af7e-8021-a008-e6b3dde0d08a" class="code"><code class="language-JavaScript">onStart = ()=&gt;{
+	// Quando o jogo abrir
+}
+
+onUpdate = ()=&gt;{
+	// A cada frame
+}</code></pre><h2 id="16609046-af7e-80ca-b7ce-ee5896168118" class="">Nodes (objetos)</h2><p id="16609046-af7e-8082-95e5-ddd2e7b9c70f" class="">Na CD Engine utilizamos Nodes que são objetos manipuláveis, nodes podem conter física e sprites para serem visualizados e/ou simulados no mundo do seu jogo.</p><p id="16609046-af7e-8087-bc7f-c87531011c36" class="">Para criar um novo Node basta criar uma variável com o nome desejado e atribuir um new Node().</p><p id="16609046-af7e-80cb-898f-eb554331c6ef" class="">Veja um exemplo :</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16609046-af7e-8077-9194-f95ab2f26a2a" class="code"><code class="language-JavaScript">var NovoObjeto = new Node(
+	0, // Posição x
+	0, // Posição y
+	50, // Largura
+	50, // Altura
+	&quot;imagem.png&quot;, // Sprite do objeto, deve estar na pasta do projeto, caso esteja dentro de uma subpasta, deve-se incluir a pasta
+	MainWorld, // Mundo / Cena que o objeto será criado
+);</code></pre><p id="17409046-af7e-806d-8c7b-daf9cbafd832" class="">Caso queira removerem um objeto, basta usar a função <em>.remove </em>para a remoção do objeto.</p><p id="17409046-af7e-80c0-bd7a-d84a8ff8e5a8" class="">Veja um exemplo :</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="17409046-af7e-808c-aff2-f0389e76e65f" class="code"><code class="language-JavaScript">NovoObjeto.remove(); // Remove o objeto da cena atual</code></pre><h1 id="16709046-af7e-8008-8483-e750239a696c" class="">Mundos (Cenas)</h1><p id="16709046-af7e-8074-b90c-d54acabfc8d9" class="">Mundos na CD Engine são como cenas, eles servem para diferenciar locais e acontecimentos em seu jogo e de padrão existe o mundo <em>MainWorld</em> que é criado por padrão pela engine, mas você pode criar outros mundos e iniciar eles.</p><p id="16709046-af7e-8064-8c55-d506d38c53d8" class="">Aqui um exemplo :</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16709046-af7e-80bc-b4e6-f7b7a6a016ed" class="code"><code class="language-JavaScript">const MeuMundo = new World(); // Cria um mundo novo
+changeWorld(MeuMundo); // Seleciona o mundo criado e inicia ele
+ThisWorld; // Variável que retorna o mundo atual</code></pre><p id="16a09046-af7e-80e9-b930-d27424758c78" class="">E você pode alterar a cor de fundo usando o <em>setBackgroundColor</em>. Com essa função você pode escolher uma cor (rgb, rgba, hex, hsls e etc) e definir a cor de seu fundo de forma simples e você pode também escolher uma imagem para ser o fundo do seu jogo.</p><p id="17609046-af7e-8096-a114-c2c69d7dd3fe" class="">Os mundos possuem estruturas que podem ajudar no desenvolvimento de seu jogo pois com as estruturas, seu jogo ficará mais organizado e bem estruturado.</p><p id="17609046-af7e-80ee-8869-f4ec564e7177" class="">Aqui um exemplo :</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="17609046-af7e-80d9-b0e8-f0debeb09baf" class="code"><code class="language-JavaScript">const MeuMundo = new World();
+MeuMundo.onStart = ()=&gt;{
+	// Quando a cena iniciar
+};
+
+MeuMundo.onUpdate = ()=&gt;{
+	// Sempre que a cena estiver em execução
+};
+
+MeuMundo.onEnd = ()=&gt;{
+	// Quando a cena finalizar
+};</code></pre><p id="16a09046-af7e-8073-9b3a-ebb5c40f07e4" class="">Aqui um exemplo :</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16a09046-af7e-804e-84d9-e01ca12ffde0" class="code"><code class="language-JavaScript">setBackgroundColor(&quot;#f00&quot;); // Cor de fundo mudada para vermelho
+setBackgroundSprite(&quot;background.png&quot;); // Imagem de fundo mudada
+setBackgroundPosition(0,0); // Posição de fundo mudada para x 0 e y 0</code></pre><h2 id="16609046-af7e-8099-9377-eadca9b81128" class="">Física com Nodes</h2><p id="16609046-af7e-808e-87b4-c71e40c30ae4" class="">Como dito anteriormente, podemos usar da física para criar elementos com gravidade ou estáticos para a criação de seu jogo.</p><p id="16609046-af7e-80a9-a6bf-c4aec985f4a1" class="">Para criar um objeto com física basta adicionarmos o atributo <em>addPhysicbody</em> e definir se ele vai ser estático ou não.</p><p id="16609046-af7e-802c-aa33-c8f02e9dfd4f" class="">Aqui um exemplo bem simples de como usar :</p><p id="16609046-af7e-8037-b710-dfa7f250daeb" class=""> </p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16609046-af7e-80a9-8b04-eaf886365590" class="code"><code class="language-JavaScript">Player.addPhysicbody(); // Objeto com física dinâmico
+Ground.addPhysicbody(false); // Objeto com física estático</code></pre><p id="16609046-af7e-80bb-a5ac-db674ba021f4" class="">Podemos também definir a velocidade do objeto para poder criar sistemas de pulo e movimento, podemos usar para fazer portas abrirem/fecharem e até mesmo veículos simples, para isso usamos a função <em>defineVelocity</em> para a definição da velocidade, com isso podemos definir a velocidade x e y do objeto desejado e caso não queira mudar o x somente o y e vice-versa, basta adicionar <em>null</em> no local.</p><p id="16609046-af7e-8070-adf0-f7ab22c9ad6b" class="">Aqui um exemplo :</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16609046-af7e-807c-89a3-d01cb6ba8e67" class="code"><code class="language-JavaScript">// Pulo simples apenas com a velocidade y
+
+Player.defineVelocity(
+	0, // Velocidade x
+	-200 // Velocidade y
+);
+
+// Movimento simples apenas com a velocidade x
+
+Player.defineVelocity(
+	100, // Velocidade x
+	0 // Velocidade y
+);
+
+// Pulo simples apenas com a velocidade y sem alterar a velocidade x
+
+Player.defineVelocity(
+	null, // Velocidade x
+	-200 // Velocidade y
+);
+
+// Movimento simples apenas com a velocidade x sem alterar a velocidade y
+
+Player.defineVelocity(
+	100, // Velocidade x
+	null // Velocidade y
+);</code></pre><p id="17409046-af7e-8073-b52b-f21b9b7b5d2a" class="">Podemos bloquear a rotação de um node também usando o <em>.fixedAngle</em> de forma simples.</p><p id="17409046-af7e-800e-9057-ece54846487b" class="">Aqui um exemplo :</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="17409046-af7e-80a2-9d81-c8ca6b093c21" class="code"><code class="language-JavaScript">Player.fixedAngle = true; // Bloqueia a rotação</code></pre><p id="17409046-af7e-80eb-9dd0-e425763c300e" class="">
+</p><p id="17409046-af7e-80d7-b7f5-d61ccf6f8b1d" class="">Caso seu node tenha física aplicada, você recebe uma função para definir a posição do node com física.</p><p id="17409046-af7e-8092-ad50-d03e4aa4b300" class="">Ficaria assim :</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="17409046-af7e-80af-985e-c747c552f7e1" class="code"><code class="language-JavaScript">Player.definePosition(0,0); // Posição no x 0 e y 0</code></pre><p id="17609046-af7e-8042-a7b3-c168b645ef98" class="">Você também pode verificar se dois objetos estão colidindo de forma simples usando o <em>checkCollision</em> e definindo uma precisão, quanto menor a precisão, mais preciso.</p><p id="17609046-af7e-8048-ad01-d7552f80373d" class="">Aqui um exemplo :</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="17609046-af7e-80eb-8b61-e0481ac3dc0a" class="code"><code class="language-JavaScript">const onUpdate = ()=&gt;{
+	if(checkCollision(obj1, obj2, 1) return true; // Retorna true se ojb1 estiver colidindo com obj2
+};</code></pre><h2 id="16a09046-af7e-8057-8c10-d93b20a72f12" class="">Spritesheet</h2><p id="16a09046-af7e-80a4-b0c6-dc3edefe9dbf" class="">Na CD Engine, podemos criar sprites sheets de forma simples, cada node tem uma variável chamada sheet que é um sub-objeto que tem os atributos da sheet.</p><p id="16a09046-af7e-80a5-8875-c04a3da65107" class="">Aqui um exemplo completo usando spritesheets :</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16a09046-af7e-80bb-9163-c9ca6dd9a981" class="code"><code class="language-JavaScript">var Player = new Node(0,0,40,60,&quot;spritesheet.png&quot;);
+Player.sheet.enabled = true; // Habilita o spritesheet
+Player.sheet.x = 0; // Posição x no spritesheet
+Player.sheet.y = 0; // Posição y no spritesheet
+Player.sheet.width = 40; // Largura da sprite no spritesheet
+Player.sheet.height = 60; // Altura da sprite no spritesheet</code></pre><h2 id="16609046-af7e-80c8-a4f7-fb3e8b246a7b" class="">Câmera</h2><p id="16609046-af7e-80e4-a6fa-e4c23153c489" class="">Na CD Engine, colocar um ponto de visualização (câmera) é muito simples, basta você usar o <em>pointView</em> e selecionar o node desejado.</p><p id="16609046-af7e-80ac-a9f2-c1380fcec719" class="">Segue um exemplo :</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16609046-af7e-805b-a047-c86db5623c4b" class="code"><code class="language-JavaScript">pointView.node = Player; // Câmera focará no player</code></pre><h2 id="16609046-af7e-803a-849e-da15ff1d3b59" class="">Interfaces</h2><p id="16609046-af7e-80ff-bc43-d919ddb4ad34" class="">Na CD Engine é possível criar interfaces simples para seus jogos como textos e botões para criar sistemas como menu, tela de loading, GUI do jogador e etc.</p><p id="16609046-af7e-80e9-9e5b-dc363d373aba" class="">Para criar essas interfaces é similar ao <em>Node</em>, mas deve-se usar <em>Interface</em> .</p><p id="16609046-af7e-80f0-8def-f58ba30cc126" class="">Segue-se um exemplo :</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16609046-af7e-80f8-b43d-fe4187d29ce3" class="code"><code class="language-JavaScript">var MinhaInterface = new Interface(
+	0, // Posição x
+	0, // Posição y
+	100, // Largura
+	50, // Altura
+	&quot;#0005&quot; // Cor de fundo
+);
+
+MinhaInterface.setText(&quot;Não me toque&quot;); // Define o texto da interface
+
+MinhaInterface.addClickEvent(()=&gt;{ // Adiciona evento de quando clicado
+	alert(&quot;Não me toque!!!&quot;);
+});
+
+MinhaInterface.setColor(&quot;red&quot;); // Define a cor da interface
+MinhaInterface.setSprite(&quot;imagem.png&quot;); // Define a sprite da interface
+MinhaInterface.setText(&quot;Hello, World&quot;); // Define o texto da interface
+
+MinhaInterface.hide(); // Esconde a interface
+MinhaInterface.show(); // Mostra a interface
+MinhaInterface.clicked // Retorna true se a interface estiver sendo clicada com o mouse
+MinhaInterface.touched // Retorna true se a interface estiver sendo clicada com o toque</code></pre><h2 id="16609046-af7e-8064-a130-c91fd252b447" class="">Detectar tecla pressionada</h2><p id="16609046-af7e-80f3-8666-e79035b2b143" class="">Na CD Engine, você pode verificar se uma tecla foi pressionada usando a variável <em>pressedKeys </em>para verificar se uma tecla desejada foi pressionada, você deve usar um loop para fazer isso, pode ser um <em>requestAnimationFrame</em> (recomendado) ou um <em>setInterval.</em></p><p id="16609046-af7e-80c0-8d05-d07cde534512" class="">Segue um exemplo :</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16609046-af7e-80c7-81eb-ff84223ca0ca" class="code"><code class="language-JavaScript">function verificarTeclas(){ // Cria um loop
+	requestAnimationFrame(verificarTeclas); // Chama o loop
+	if(pressedKeys.includes(&quot;d&quot;) { // Verifica se a tecla D está sendo pressionada
+		Player.defineVelocity(100, null); // Se a tecla estiver sendo pressionada, a velocidade x do objeto Player é definida para 100.
+	};
+};
+requestAnimationFrame(verificarTeclas); // Inicia o loop</code></pre><h1 id="16709046-af7e-804a-86e2-f873f48f1c92" class="">Funções</h1><p id="16709046-af7e-805c-97f9-e23af030e96d" class="">Aqui uma lista de funções da engine que podem ajudar no desenvolvimento de seu projeto :</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16709046-af7e-8099-93bf-f36240c101fc" class="code"><code class="language-JavaScript">getRandom(mínimo, máximo); // Retorna um número aleatório com um valor mínimo e um máximo
+
+wait(segundos, () =&gt; { // Executa um código após alguns segundos
+  console.log(&quot;Passaram 2 segundos!&quot;);
+});
+
+print(&quot;Texto&quot;, x, y, tamanho, &quot;cor&quot;, &quot;Fonte&quot;, &quot;estilo&quot;, &quot;centralização&quot;); // Escreve algo direto na tela
+
+loadFont(&quot;https://example.com/fonts/MyFont.ttf&quot;); // Carrega uma fonte para ser usada no print
+</code></pre><h1 id="17609046-af7e-80fa-a846-d2ada05432c8" class="">Sons</h1><p id="17609046-af7e-8048-a7eb-c2148f8079e9" class="">A CD Engine tem suporte a sistemas de sons com e sem loopings que facilita a aplicação de músicas de fundo  e efeitos sonoros como morte, pulo, captura de moeda e etc.</p><p id="17609046-af7e-80e3-9ee0-e47a653eabd9" class="">Sons devem ser criados fora de extruturas e devem ser executadas dentro de alguma estrutura e de preferência <em>onStart</em> por segurança do JavaScript.</p><p id="17609046-af7e-803d-8e3e-c6842e271e6c" class="">Aqui um bom exemplo :</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="17609046-af7e-8069-804b-eff65f48b3dd" class="code"><code class="language-JavaScript">// Estrutura do som &quot;Sound(caminho do som.mp3, é loop?)&quot;
+var som; // Define a variável do som
+
+onStart = ()=&gt;{
+	som = new Sound(&quot;som.mp3&quot;, true); // Cria o som em loop
+	som.play(); // Inicia o som
+	som.stop(); // Finaliza o som
+}</code></pre><h1 id="16609046-af7e-8008-8388-ca759a6309be" class="">Apoio</h1><p id="16609046-af7e-8013-98b4-ec6ccce19d47" class="">Obrigado por escolher a CD Engine, você pode me apoiar entrando no grupo do <em><strong><a href="https://chat.whatsapp.com/DEIT0euRcwM3LqAzIepxCv">Whatsapp</a></strong></em> e/ou doar em meu pix leonardopinezi.ti@gmail.com</p><p id="16609046-af7e-8095-98c6-d44ca851b956" class="">Esse projeto dá muito trabalho, cada apoio ajuda muito, muito obrigado &lt;3</p><h1 id="16609046-af7e-801c-adcf-ddd4b0b0b334" class="">Projetos de exemplo</h1><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16609046-af7e-80b2-9065-cdab87523c3c" class="code"><code class="language-JavaScript">// Cria um jogo simples com um player, um chão e um sistema de movimentação simples com teclado.
+
+var player_sprite = &quot;Defina a sprite do player&quot;;
+
+var player;
+var ground;
+
+pointView.node = player;
+
+onStart = ()=&gt;{
+	player = new Node(0,0,50,50,player_sprite);
+	ground = new Node(0,250,500,50,&quot;Defina a sprite do chão&quot;);
+	player.addPhysicbody();
+	ground.addPhysicbody(false);
+};
+
+
+onUpdate = ()=&gt;{
+  if(pressedKeys.includes(&quot;d&quot;)) player.defineVelocity(100,null);
+  if(pressedKeys.includes(&quot;a&quot;)) player.defineVelocity(-100,null);
+  if(!pressedKeys.includes(&quot;a&quot;) &amp;&amp; !pressedKeys.includes(&quot;d&quot;)) player.defineVelocity(0,null);
+};</code></pre><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="17009046-af7e-800f-9cfa-e59d9c91edba" class="code"><code class="language-JavaScript">const playerSprite = &quot;player.png&quot;;
+const groundSprite = &quot;ground.png&quot;;
+
+onStart = () =&gt; {
+  // Criar o jogador
+  const player = new Node(200, 100, 50, 50, playerSprite);
+  player.addPhysicbody(1); // Corpo dinâmico para o jogador
+  pointView.node = player; // Centraliza a câmera no jogador
+
+  // Criar o chão
+  const ground = new Node(0, 300, 800, 50, groundSprite);
+  ground.addPhysicbody(0); // Corpo estático para o chão
+
+  // Adicionar várias plataformas
+  for (let i = 0; i &lt; 5; i++) {
+    const platform = new Node(150 * i + 100, 200 - 50 * i, 100, 20, groundSprite);
+    platform.addPhysicbody(0); // Corpo estático para as plataformas
+  }
+
+  // Adicionar controle ao jogador
+  onUpdate = (dt) =&gt; {
+    const speed = 200;
+    const jumpForce = -300;
+
+    // Movimento lateral
+    if (pressedKeys.includes(&quot;ArrowRight&quot;)) {
+      player.defineVelocity(speed, null);
+    } else if (pressedKeys.includes(&quot;ArrowLeft&quot;)) {
+      player.defineVelocity(-speed, null);
+    } else {
+      player.defineVelocity(0, null);
+    }
+
+    // Pulo (somente se estiver tocando o chão)
+    if (pressedKeys.includes(&quot;ArrowUp&quot;) &amp;&amp; Math.round(player.body.velocity[1]) === 0) {
+      player.defineVelocity(null, jumpForce);
+    }
+
+    // Prevenir que o jogador saia da tela
+    if (player.x &lt; 0) player.x = 0;
+    if (player.x &gt; canvas.width - player.width) player.x = canvas.width - player.width;
+  };
+};</code></pre><p id="17009046-af7e-8004-a032-f5dab2cc206b" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
