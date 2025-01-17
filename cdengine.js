@@ -1,10 +1,16 @@
-const canvas = document.getElementById('gameCanvas');
+const canvas = document.createElement('canvas');
+document.body.appendChild(canvas);
 const ctx = canvas.getContext('2d');
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 canvas.style.width = "100%";
 canvas.style.height = "100%";
+canvas.style.position = "fixed";
+canvas.style.left = "0px";
+canvas.style.top = "0px";
+canvas.style.border = "none";
+canvas.style.zIndex = "-1";
 canvas.style.backgroundColor = "#111";
 canvas.style.imageRendering = "pixelated";
 
